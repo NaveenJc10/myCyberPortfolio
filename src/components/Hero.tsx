@@ -16,7 +16,7 @@ export default function Hero() {
                     transition={{ duration: 0.5 }}
                 >
                     <h2 className="text-sm md:text-base font-medium text-muted-foreground mb-4 tracking-wider uppercase">
-                        Cyber Security Analyst
+                        Cyber Security Professional
                     </h2>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] mb-6">
                         Farhan <br />
