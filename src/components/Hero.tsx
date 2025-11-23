@@ -28,7 +28,7 @@ export default function Hero() {
 
                     <div className="flex items-center gap-4">
                         <div className="h-[1px] w-12 bg-white/20"></div>
-                        <span className="text-sm text-muted-foreground">Based in Ahmedabad, India</span>
+                        <span className="text-sm text-muted-foreground">Based in India</span>
                     </div>
                 </motion.div>
 

@@ -6,12 +6,18 @@ import Link from "next/link";
 import { Menu, X, Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+interface NavItem {
+    name: string;
+    href: string;
+    external?: boolean;
+}
+
+const navItems: NavItem[] = [
     { name: "Home", href: "#" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
-    { name: "Blog", href: "https://fxrhanansari.medium.com/", external: true },
+    { name: "Blog", href: "#blog" },
 ];
 
 export default function Header() {

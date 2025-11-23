@@ -122,7 +122,7 @@ export default function Blog() {
     }, []);
 
     return (
-        <section className="py-20 px-4 md:px-10 bg-black border-t border-white/5">
+        <section id="blog" className="py-20 px-4 md:px-10 bg-black border-t border-white/5">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -141,7 +141,7 @@ export default function Blog() {
                         target="_blank"
                         className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-white transition-colors"
                     >
-                        Read more on Medium <ArrowUpRight className="w-4 h-4" />
+                        Read more blogs on Medium <ArrowUpRight className="w-4 h-4" />
                     </Link>
                 </motion.div>
 

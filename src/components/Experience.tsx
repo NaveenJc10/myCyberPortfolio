@@ -6,21 +6,26 @@ import { Briefcase } from "lucide-react";
 const experiences = [
     {
         company: "RAPIDOPS INC.",
-        role: "Security Associate",
+        role: "Associate",
         period: "January 2024 – Present",
         location: "Ahmedabad, Gujarat",
+        logo: "https://logo.clearbit.com/rapidops.com"
     },
     {
         company: "EF EDUCATION FIRST",
         role: "Cyber Security Analyst",
         period: "July 2022 – December 2023",
         location: "Zurich, Switzerland",
+        logo: "/ef_logo.png",
+        transparentBg: true
     },
     {
         company: "EF EDUCATION FIRST",
         role: "Cyber Security Intern",
         period: "May 2022 – June 2022",
         location: "London, UK",
+        logo: "/ef_logo.png",
+        transparentBg: true
     }
 ];
 
@@ -38,6 +43,9 @@ export default function Experience() {
                         <Briefcase className="w-8 h-8 md:w-12 md:h-12 text-primary" />
                         Experience
                     </h2>
+                    <p className="text-muted-foreground max-w-md">
+                        A timeline of my professional growth and contributions in the cybersecurity landscape.
+                    </p>
                 </motion.div>
 
                 <div className="relative">
@@ -77,14 +85,26 @@ export default function Experience() {
                                     transition={{ duration: 0.2 }}
                                     className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all"
                                 >
-                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
-                                                {exp.role}
-                                            </h3>
-                                            <p className="text-primary font-medium">{exp.company}</p>
+                                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-2">
+                                        <div className="flex items-center gap-4">
+                                            <div className={`w-12 h-12 rounded-full p-1 flex items-center justify-center overflow-hidden shrink-0 ${
+                                                // @ts-ignore
+                                                exp.transparentBg ? '' : 'bg-white'
+                                                }`}>
+                                                <img
+                                                    src={exp.logo}
+                                                    alt={`${exp.company} logo`}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
+                                                    {exp.role}
+                                                </h3>
+                                                <p className="text-primary font-medium">{exp.company}</p>
+                                            </div>
                                         </div>
-                                        <div className="text-muted-foreground text-sm md:text-right">
+                                        <div className="text-muted-foreground text-sm md:text-right pl-[4rem] md:pl-0">
                                             <p className="font-medium">{exp.period}</p>
                                             <p>{exp.location}</p>
                                         </div>

@@ -17,7 +17,7 @@ const projects = [
     {
         title: "takeover",
         category: "Open Source Contribution",
-        description: "Sub-Domain TakeOver Vulnerability Scanner (edoardottt fork).",
+        description: "Sub-Domain TakeOver Vulnerability Scanner.",
         link: "https://github.com/edoardottt/takeover",
         color: "bg-orange-500",
         image: "/takeover_bg.png"
@@ -25,7 +25,7 @@ const projects = [
     {
         title: "Packet-Sniffer",
         category: "Cybersecurity Tool",
-        description: "A simple packet sniffer coded in pure python.",
+        description: "A packet sniffer coded in pure python.",
         link: "https://github.com/fxrhan/Packet-Sniffer",
         color: "bg-green-500",
         image: "/packet_sniffer_bg.png"

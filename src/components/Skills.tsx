@@ -76,6 +76,9 @@ export default function Skills() {
                     className="mb-16"
                 >
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">Skills that fuel my passion</h2>
+                    <p className="text-muted-foreground max-w-md">
+                        My technical arsenal, ranging from offensive and defensive security tools to modern web development frameworks.
+                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
@@ -86,7 +89,7 @@ export default function Skills() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className={`p-6 rounded-3xl border flex flex-col justify-between group hover:border-primary/50 transition-colors ${skill.className}`}
+                            className={`p-6 rounded-3xl border flex flex-col justify-between group hover:border-primary/50 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 ${skill.className}`}
                         >
                             <div className="flex justify-between items-start">
                                 <div className="p-2 bg-white/5 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
