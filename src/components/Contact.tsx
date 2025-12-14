@@ -39,8 +39,24 @@ export default function Contact() {
                     <div className="flex flex-col md:flex-row justify-between items-end gap-10">
                         <div>
                             <p className="text-muted-foreground mb-2">your friendly chaos creator</p>
-                            <h1 className="text-[12vw] leading-none font-bold tracking-tighter text-white">
-                                Farhan
+                            <h1 className="text-[12vw] leading-none font-bold tracking-tighter text-white flex overflow-hidden py-4">
+                                {"Farhan".split("").map((letter, index) => (
+                                    <motion.span
+                                        key={index}
+                                        initial={{ y: 0 }}
+                                        animate={{ y: [0, -20, 0] }}
+                                        transition={{
+                                            duration: 2.5,
+                                            ease: "easeInOut",
+                                            repeat: Infinity,
+                                            repeatDelay: 0,
+                                            delay: index * 0.15,
+                                        }}
+                                        className="inline-block"
+                                    >
+                                        {letter}
+                                    </motion.span>
+                                ))}
                             </h1>
                         </div>
 
