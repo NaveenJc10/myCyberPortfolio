@@ -39,8 +39,8 @@ export default function Hero() {
                     className="relative h-[400px] md:h-[600px] w-full rounded-2xl overflow-hidden transition-all duration-500"
                 >
                     <Image
-                        src="/hero.jpg"
-                        alt="Farhan in Cyber"
+                        src="/hero.webp"
+                        alt="Farhan Ansari - Cyber Security Professional"
                         fill
                         className="object-cover"
                         quality={100}

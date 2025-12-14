@@ -44,11 +44,11 @@ export default function Contact() {
                             </h1>
                         </div>
 
-                        <div className="flex gap-6 mb-4">
-                            <Link href="https://linkedin.com/in/ansari-farhan" target="_blank" className="text-muted-foreground hover:text-white transition-colors">LinkedIn</Link>
-                            <Link href="https://github.com/fxrhan" target="_blank" className="text-muted-foreground hover:text-white transition-colors">GitHub</Link>
-                            <Link href="https://x.com/fxrhanansari" target="_blank" className="text-muted-foreground hover:text-white transition-colors">X (Twitter)</Link>
-                            <Link href="https://fxrhanansari.medium.com/" target="_blank" className="text-muted-foreground hover:text-white transition-colors">Medium</Link>
+                        <div className="flex flex-wrap gap-2 md:gap-6 mb-4">
+                            <Link href="https://linkedin.com/in/ansari-farhan" target="_blank" className="text-muted-foreground hover:text-white transition-colors py-2 px-3 min-h-[44px] min-w-[44px] flex items-center touch-manipulation">LinkedIn</Link>
+                            <Link href="https://github.com/fxrhan" target="_blank" className="text-muted-foreground hover:text-white transition-colors py-2 px-3 min-h-[44px] min-w-[44px] flex items-center touch-manipulation">GitHub</Link>
+                            <Link href="https://x.com/fxrhanansari" target="_blank" className="text-muted-foreground hover:text-white transition-colors py-2 px-3 min-h-[44px] min-w-[44px] flex items-center touch-manipulation">X (Twitter)</Link>
+                            <Link href="https://fxrhanansari.medium.com/" target="_blank" className="text-muted-foreground hover:text-white transition-colors py-2 px-3 min-h-[44px] min-w-[44px] flex items-center touch-manipulation">Medium</Link>
                         </div>
                     </div>
                 </motion.div>

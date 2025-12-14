@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     siteName: "Farhan in Cyber",
     images: [
       {
-        url: "/hero_bg.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Farhan in Cyber - Cyber Security Portfolio",
+        alt: "Farhan Ansari - Cyber Security Professional",
       },
     ],
     locale: "en_US",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Farhan in Cyber",
     description: "Portfolio of Farhan Ansari - Cyber Security Analyst",
-    images: ["/hero_bg.png"],
+    images: ["/og-image.png"],
     creator: "@fxrhanansari",
   },
   robots: {
@@ -77,7 +77,7 @@ export default function RootLayout({
       "https://linkedin.com/in/ansari-farhan",
     ],
     description: "Cyber Security Analyst specializing in Penetration Testing, Cloud Security, and Security Operations.",
-    image: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/hero_bg.png`,
+    image: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/og-image.png`,
     knowsAbout: ["Penetration Testing", "Cloud Security", "Security Operations", "Splunk", "Azure", "AWS"],
   };
 

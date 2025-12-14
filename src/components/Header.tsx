@@ -109,10 +109,12 @@ export default function Header() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-white"
+                    className="md:hidden text-white p-3 -mr-3 min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label={isOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={isOpen}
                 >
-                    {isOpen ? <X /> : <Menu />}
+                    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
             </div>
 
@@ -138,7 +140,7 @@ export default function Header() {
                                     <Link
                                         href={item.href}
                                         target={item.external ? "_blank" : undefined}
-                                        className="block text-lg font-medium text-muted-foreground hover:text-white transition-colors py-2 px-4 rounded-lg hover:bg-white/5"
+                                        className="block text-lg font-medium text-muted-foreground hover:text-white transition-colors py-3 px-4 rounded-lg hover:bg-white/5 min-h-[44px] touch-manipulation"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         {item.name}

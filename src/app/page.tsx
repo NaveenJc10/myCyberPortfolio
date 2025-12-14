@@ -7,19 +7,34 @@ import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
+import SectionTransition, { PageTransition } from "@/components/PageTransition";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-primary/30">
-      <Header />
-      <Hero />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Certifications />
-      <Blog />
-      <Contact />
-      <BackToTop />
-    </main>
+    <PageTransition>
+      <main className="min-h-screen bg-black text-white selection:bg-primary/30">
+        <Header />
+        <Hero />
+        <SectionTransition delay={0.1}>
+          <Skills />
+        </SectionTransition>
+        <SectionTransition delay={0.1}>
+          <Experience />
+        </SectionTransition>
+        <SectionTransition delay={0.1}>
+          <Projects />
+        </SectionTransition>
+        <SectionTransition delay={0.1}>
+          <Certifications />
+        </SectionTransition>
+        <SectionTransition delay={0.1}>
+          <Blog />
+        </SectionTransition>
+        <SectionTransition delay={0.1}>
+          <Contact />
+        </SectionTransition>
+        <BackToTop />
+      </main>
+    </PageTransition>
   );
 }
