@@ -98,9 +98,9 @@ export default function Certifications() {
                             {cert.inProgress && (
                                 <>
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 pointer-events-none" />
-                                    <div className="absolute top-3 right-3 flex items-center gap-1.5 z-10">
-                                        <Clock className="w-3 h-3 text-primary" />
-                                        <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/30 text-primary border border-primary/50 shadow-lg shadow-primary/20 backdrop-blur-md">
+                                    <div className="absolute top-3 right-3 flex items-center gap-1 md:gap-1.5 z-10">
+                                        <Clock className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary" />
+                                        <span className="text-[10px] md:text-xs font-medium px-1.5 md:px-2 py-0.5 md:py-1 rounded-full bg-primary/30 text-primary border border-primary/50 shadow-lg shadow-primary/20 backdrop-blur-md">
                                             In Progress
                                         </span>
                                     </div>
