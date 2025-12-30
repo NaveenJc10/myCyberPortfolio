@@ -149,8 +149,8 @@ const toggleExpand = (index: number) => {
                                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                                     className="overflow-hidden"
                                                 >
-                                                    <div className="pt-4 pl-0 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-5 md:-mx-6 px-4 md:px-6 pb-4 rounded-b-xl">
-                                                        <ul className="space-y-3 text-sm md:text-sm text-white/70 pr-2 md:pr-0">
+                                                    <div className="pt-4 pl-1 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-5 md:-mx-6 px-3 md:px-6 pb-4 rounded-b-xl">
+                                                        <ul className="space-y-3 text-sm md:text-sm text-white/70">
                                                             {exp.description.map((item, i) => (
                                                                 <motion.li
                                                                     key={i}
