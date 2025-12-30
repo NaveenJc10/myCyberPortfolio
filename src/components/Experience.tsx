@@ -50,13 +50,13 @@ const toggleExpand = (index: number) => {
 
 
     return (
-        <section className="py-20 px-4 md:px-10 bg-zinc-950">
+        <section className="py-20 px-3 md:px-10 bg-zinc-950">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-16"
+                    className="mb-16 px-1 md:px-0"
                 >
                     <h2 className="text-3xl md:text-5xl font-bold mb-6 flex items-center gap-4">
                         <Briefcase className="w-8 h-8 md:w-12 md:h-12 text-primary" />
@@ -85,7 +85,7 @@ const toggleExpand = (index: number) => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2, duration: 0.5 }}
-                                className="relative pl-6 md:pl-12 group"
+                                className="relative pl-5 md:pl-12 group"
                             >
                                 {/* Animated Dot */}
                                 <motion.div
@@ -102,7 +102,7 @@ const toggleExpand = (index: number) => {
                                 <motion.div
                                     whileHover={{ x: 4 }}
                                     transition={{ duration: 0.2 }}
-                                    className="p-4 md:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer"
+                                    className="p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer"
                                     onClick={() => toggleExpand(index)}
                                 >
                                     <div className="flex flex-col gap-4">
@@ -149,18 +149,18 @@ const toggleExpand = (index: number) => {
                                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                                     className="overflow-hidden"
                                                 >
-                                                    <div className="pt-4 pl-0 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-4 md:-mx-6 px-4 md:px-6 pb-2 rounded-b-xl">
-                                                        <ul className="space-y-2 text-xs md:text-sm text-white/60">
+                                                    <div className="pt-4 pl-0 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-5 md:-mx-6 px-5 md:px-6 pb-4 rounded-b-xl">
+                                                        <ul className="space-y-3 text-sm md:text-sm text-white/70">
                                                             {exp.description.map((item, i) => (
                                                                 <motion.li
                                                                     key={i}
                                                                     initial={{ opacity: 0, x: -10 }}
                                                                     animate={{ opacity: 1, x: 0 }}
                                                                     transition={{ delay: i * 0.1 }}
-                                                                    className="flex gap-2 items-start"
+                                                                    className="flex gap-2 items-start leading-relaxed"
                                                                 >
-                                                                    <span className="text-primary text-xs mt-0.5">•</span>
-                                                                    <span>{item}</span>
+                                                                    <span className="text-primary text-xs mt-1 shrink-0">•</span>
+                                                                    <span className="flex-1">{item}</span>
                                                                 </motion.li>
                                                             ))}
                                                         </ul>
