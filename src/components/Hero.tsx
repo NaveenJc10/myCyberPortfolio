@@ -37,7 +37,7 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-                <motion.div
+<motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ 
@@ -52,7 +52,11 @@ export default function Hero() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-contain"
+                        preload="auto"
+                        controls={false}
+                        disablePictureInPicture
+                        className="absolute inset-0 w-full h-full object-contain [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-start-playback-button]:hidden"
+                        style={{ pointerEvents: 'none' }}
                     >
                         <source src="/cybervid.webm" type="video/webm" />
                         Your browser does not support the video tag.
