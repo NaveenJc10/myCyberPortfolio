@@ -89,7 +89,7 @@ export default function Certifications() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className={`p-6 rounded-2xl border transition-colors flex items-center gap-4 relative overflow-hidden ${
+                            className={`p-4 md:p-6 rounded-2xl border transition-colors flex items-center gap-3 md:gap-4 relative overflow-hidden ${
                                 cert.inProgress 
                                     ? 'bg-white/[0.03] border-white/20 backdrop-blur-sm opacity-60' 
                                     : 'bg-white/5 border-white/10 hover:border-primary/50'
@@ -98,15 +98,15 @@ export default function Certifications() {
                             {cert.inProgress && (
                                 <>
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 pointer-events-none" />
-                                    <div className="absolute top-3 right-3 flex items-center gap-1 md:gap-1.5 z-10">
-                                        <Clock className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary" />
-                                        <span className="text-[10px] md:text-xs font-medium px-1.5 md:px-2 py-0.5 md:py-1 rounded-full bg-primary/30 text-primary border border-primary/50 shadow-lg shadow-primary/20 backdrop-blur-md">
+                                    <div className="absolute top-2 right-2 md:top-3 md:right-3 flex items-center gap-0.5 md:gap-1.5 z-10">
+                                        <Clock className="w-2 h-2 md:w-3 md:h-3 text-primary" />
+                                        <span className="text-[8px] md:text-xs font-medium px-1 md:px-2 py-0.5 md:py-1 rounded-full bg-primary/30 text-primary border border-primary/50 shadow-lg shadow-primary/20 backdrop-blur-md">
                                             In Progress
                                         </span>
                                     </div>
                                 </>
                             )}
-                            <div className={`w-12 h-12 rounded-full p-1 flex items-center justify-center overflow-hidden shrink-0 ${
+                            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full p-1 flex items-center justify-center overflow-hidden shrink-0 ${
                                 cert.transparentBg ? '' : 'bg-white'
                                 }`}>
                                 <img
@@ -116,8 +116,8 @@ export default function Certifications() {
                                 />
                             </div>
                             <div>
-                                <h3 className="text-xl font-semibold mb-1">{cert.name}</h3>
-                                <div className="flex justify-between text-sm text-muted-foreground">
+                                <h3 className="text-base md:text-xl font-semibold mb-1">{cert.name}</h3>
+                                <div className="flex justify-between text-xs md:text-sm text-muted-foreground">
                                     <span>{cert.issuer}</span>
                                     {/* <span>{cert.year}</span> */}
                                 </div>
