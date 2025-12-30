@@ -133,9 +133,9 @@ const toggleExpand = (index: number) => {
                                         </div>
 
                                         {/* Bottom row: Period + Location */}
-                                        <div className="flex items-center flex-nowrap gap-x-2 md:gap-x-4 text-muted-foreground text-xs md:text-sm pl-0 md:pl-14 overflow-x-auto">
+                                        <div className="flex items-center gap-x-2 md:gap-x-4 text-muted-foreground text-[10px] sm:text-xs md:text-sm pl-0 md:pl-14 overflow-x-auto scrollbar-hide">
                                             <p className="font-medium whitespace-nowrap">{exp.period}</p>
-                                            <p className="text-white/40">•</p>
+                                            <p className="text-white/40 shrink-0">•</p>
                                             <p className="whitespace-nowrap">{exp.location}</p>
                                         </div>
 
