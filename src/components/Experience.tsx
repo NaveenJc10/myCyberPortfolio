@@ -133,10 +133,10 @@ const toggleExpand = (index: number) => {
                                         </div>
 
                                         {/* Bottom row: Period + Location */}
-                                        <div className="flex flex-wrap gap-x-4 gap-y-1 text-muted-foreground text-xs md:text-sm pl-0 md:pl-14">
-                                            <p className="font-medium">{exp.period}</p>
+                                        <div className="flex items-center flex-nowrap gap-x-2 md:gap-x-4 text-muted-foreground text-xs md:text-sm pl-0 md:pl-14 overflow-x-auto">
+                                            <p className="font-medium whitespace-nowrap">{exp.period}</p>
                                             <p className="text-white/40">•</p>
-                                            <p>{exp.location}</p>
+                                            <p className="whitespace-nowrap">{exp.location}</p>
                                         </div>
 
                                         {/* Expandable Description */}
@@ -149,18 +149,18 @@ const toggleExpand = (index: number) => {
                                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                                     className="overflow-hidden"
                                                 >
-                                                    <div className="pt-4 pl-0 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-5 md:-mx-6 px-5 md:px-6 pb-4 rounded-b-xl">
-                                                        <ul className="space-y-3 text-sm md:text-sm text-white/70">
+                                                    <div className="pt-4 pl-0 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-5 md:-mx-6 px-4 md:px-6 pb-4 rounded-b-xl">
+                                                        <ul className="space-y-3 text-sm md:text-sm text-white/70 pr-2 md:pr-0">
                                                             {exp.description.map((item, i) => (
                                                                 <motion.li
                                                                     key={i}
                                                                     initial={{ opacity: 0, x: -10 }}
                                                                     animate={{ opacity: 1, x: 0 }}
                                                                     transition={{ delay: i * 0.1 }}
-                                                                    className="flex gap-2 items-start leading-relaxed"
+                                                                    className="flex gap-2.5 items-start leading-relaxed"
                                                                 >
                                                                     <span className="text-primary text-xs mt-1 shrink-0">•</span>
-                                                                    <span className="flex-1">{item}</span>
+                                                                    <span className="flex-1 break-words">{item}</span>
                                                                 </motion.li>
                                                             ))}
                                                         </ul>
