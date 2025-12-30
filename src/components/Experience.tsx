@@ -1,35 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Briefcase, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const experiences = [
     {
-        company: "RAPIDOPS INC.",
-        role: "Associate",
-        period: "January 2024 – Present",
-        location: "Ahmedabad, Gujarat",
-        logo: "/rapidops_logo.png"
-    },
-    {
-        company: "EF EDUCATION FIRST",
-        role: "Cyber Security Analyst",
-        period: "July 2022 – December 2023",
-        location: "Zurich, Switzerland",
-        logo: "/ef_logo.png",
-        transparentBg: true
-    },
-    {
-        company: "EF EDUCATION FIRST",
+        company: "Merchantrade Asia Sdn Bhd",
         role: "Cyber Security Intern",
-        period: "May 2022 – June 2022",
-        location: "London, UK",
-        logo: "/ef_logo.png",
-        transparentBg: true
+        period: "January 2025 – April 2025",
+        location: "Selangor, MALAYSIA",
+        logo: "/mm_logo.png",
+        transparentBg: true,
+        description: [
+            "Documented information security incidents and investigation findings.",
+            "Conducted OSINT and threat intelligence research to support detection, attribution, and threat validation.",
+            "Performed forensic analysis of acquired data to identify evidence of malicious activity, data breaches, or other security incidents.",
+            "Analyzed digital evidence, including files, logs, system artifacts, and network data, to reconstruct events and identified attacker tactics, techniques, and procedures (TTPs).",
+            "Stayed updated on developments in the information security field through online news, technical publications, professional associations, conferences, and training seminars.",
+            "Correlated IOCs with known CVEs and affected assets to assess exposure and support incident response prioritization.",
+            "Contributed to SOC documentation, playbooks, and continuous process improvement."
+        ]
+    },
+    {
+        company: "VeecoTech Solutions Sdn Bhd",
+        role: "Web Designer Intern",
+        period: "May 2022 – August 2022",
+        location: "Penang, MALAYSIA",
+        logo: "/veecotech_logo.png",
+        transparentBg: true,
+        description: [
+            "Designed and customized responsive websites using WordPress, ensuring compatibility across desktop, tablet, and mobile devices.",
+            "Developed and enhanced front-end interfaces for web and e-commerce applications using HTML, CSS, JavaScript, PHP, and jQuery.",
+            "Customized CSS layouts and implemented pixel-perfect designs across major browsers.",
+            "Translated design concepts and creative briefs into usable, visually engaging user interfaces.",
+            "Collaborated closely with developers to ensure smooth design-to-code handoff and consistent UI behavior.",
+            "Optimized interface performance while maintaining visual consistency and usability.",
+            "Worked closely with the UX design team to ensure an optimal user experience for clients."
+        ]
     }
 ];
 
 export default function Experience() {
+const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+};
+
+
     return (
         <section className="py-20 px-4 md:px-10 bg-zinc-950">
             <div className="max-w-4xl mx-auto">
@@ -83,7 +102,8 @@ export default function Experience() {
                                 <motion.div
                                     whileHover={{ x: 4 }}
                                     transition={{ duration: 0.2 }}
-                                    className="p-4 md:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all"
+                                    className="p-4 md:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer"
+                                    onClick={() => toggleExpand(index)}
                                 >
                                     <div className="flex flex-col gap-4">
                                         {/* Top row: Logo + Role/Company */}
@@ -102,6 +122,14 @@ export default function Experience() {
                                                 </h3>
                                                 <p className="text-primary font-medium text-sm md:text-base">{exp.company}</p>
                                             </div>
+                                            {/* Expand Icon */}
+                                            <motion.div
+                                                animate={{ rotate: expandedIndex === index ? 180 : 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                className="shrink-0"
+                                            >
+                                                <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-muted-foreground" />
+                                            </motion.div>
                                         </div>
 
                                         {/* Bottom row: Period + Location */}
@@ -110,6 +138,36 @@ export default function Experience() {
                                             <p className="text-white/40">•</p>
                                             <p>{exp.location}</p>
                                         </div>
+
+                                        {/* Expandable Description */}
+                                        <AnimatePresence>
+                                            {expandedIndex === index && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <div className="pt-4 pl-0 md:pl-14 border-t border-white/10 mt-2 bg-black/20 -mx-4 md:-mx-6 px-4 md:px-6 pb-2 rounded-b-xl">
+                                                        <ul className="space-y-2 text-xs md:text-sm text-white/60">
+                                                            {exp.description.map((item, i) => (
+                                                                <motion.li
+                                                                    key={i}
+                                                                    initial={{ opacity: 0, x: -10 }}
+                                                                    animate={{ opacity: 1, x: 0 }}
+                                                                    transition={{ delay: i * 0.1 }}
+                                                                    className="flex gap-2 items-start"
+                                                                >
+                                                                    <span className="text-primary text-xs mt-0.5">•</span>
+                                                                    <span>{item}</span>
+                                                                </motion.li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
                                 </motion.div>
                             </motion.div>

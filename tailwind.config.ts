@@ -31,6 +31,19 @@ const config: Config = {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
+            animation: {
+                'typing': 'typeAndDelete 4s steps(40) infinite, blinkCursor 0.75s step-end infinite',
+            },
+            keyframes: {
+                typeAndDelete: {
+                    '0%, 10%': { width: '0' },
+                    '45%, 55%': { width: '100%' },
+                    '90%, 100%': { width: '0' },
+                },
+                blinkCursor: {
+                    '50%': { borderRightColor: 'transparent' },
+                },
+            },
         },
     },
     plugins: [],

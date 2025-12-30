@@ -1,6 +1,7 @@
+/*
 async function getFeed() {
     try {
-        const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@fxrhanansari");
+        const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@naveenjc");
         const data = await res.json();
         const item = data.items[0];
         console.log("Has content:", !!item.content);
@@ -13,3 +14,4 @@ async function getFeed() {
 }
 
 getFeed();
+*/

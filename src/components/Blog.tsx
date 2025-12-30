@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
-import { ArrowUpRight, BookOpen, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import SkeletonCard from "./SkeletonCard";
 
 interface BlogPost {
     title: string;
@@ -14,24 +13,47 @@ interface BlogPost {
     categories: string[];
 }
 
-const CACHE_KEY = "medium_blog_posts";
-const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
+const FEATURED_POSTS: BlogPost[] = [
+    {
+        title: "Beyond the Search Box: Why OSINT Is Everything Googling Isn't",
+        pubDate: new Date().toISOString(),
+        link: "https://medium.com/@naveenjc10/beyond-the-search-box-why-osint-is-everything-googling-isnt-a7ade5ee5c52",
+        thumbnail: "https://www.webopedia.com/wp-content/uploads/2024/09/what-is-osint-cover.webp",
+        categories: ["OSINT", "Cybersecurity"]
+    },
+    {
+        title: "The New Malaysia Cyber Security Act 2024: What Every Business Needs to Know",
+        pubDate: new Date().toISOString(),
+        link: "https://medium.com/@naveenjc10/the-new-malaysia-cyber-security-act-2024-what-every-business-needs-to-know-cf183bd1d539",
+        thumbnail: "https://eccweb.s3.ap-south-1.amazonaws.com/wp-content/uploads/2022/04/26103925/THE-ROLE-OF-CYBER-LAWS-IN-CYBERSECURITY-1.png",
+        categories: ["Cybersecurity", "Policy"]
+    },
+    {
+        title: "The Spotify 300TB Leak: When the World's Largest Music Library Went Public",
+        pubDate: new Date().toISOString(),
+        link: "https://medium.com/@naveenjc10/the-spotify-300tb-leak-when-the-worlds-largest-music-library-went-public-abb42c1d0771",
+        thumbnail: "https://images.unsplash.com/photo-1613329671121-5d1cf551cc3f?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        categories: ["Data Breach", "Cybersecurity"]
+    },
+    {
+        title: "Nmap Scans That Make Network Admins Lose Sleep (And How to Not Be That Person)",
+        pubDate: new Date().toISOString(),
+        link: "https://medium.com/@naveenjc10/nmap-scans-that-make-network-admins-lose-sleep-and-how-to-not-be-that-person-95769a78dc33",
+        thumbnail: "https://miro.medium.com/1*R6I7ZcaoaL0TIaclrFoR5A.png",
+        categories: ["Network Security", "Tools"]
+    }
+];
 
 const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity;
-};
+const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
 export default function Blog() {
-    const [posts, setPosts] = useState<BlogPost[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
     const paginate = (newDirection: number) => {
         const newIndex = currentIndex + newDirection;
-        if (newIndex >= 0 && newIndex < posts.length) {
+        if (newIndex >= 0 && newIndex < FEATURED_POSTS.length) {
             setDirection(newDirection);
             setCurrentIndex(newIndex);
         }
@@ -39,7 +61,6 @@ export default function Blog() {
 
     const handleDragEnd = (_e: MouseEvent | TouchEvent | PointerEvent, { offset, velocity }: PanInfo) => {
         const swipe = swipePower(offset.x, velocity.x);
-
         if (swipe < -swipeConfidenceThreshold) {
             paginate(1);
         } else if (swipe > swipeConfidenceThreshold) {
@@ -64,105 +85,6 @@ export default function Blog() {
         })
     };
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                // Check cache first (with try-catch for SSR and private browsing)
-                try {
-                    const cached = localStorage.getItem(CACHE_KEY);
-                    if (cached) {
-                        const { data, timestamp } = JSON.parse(cached);
-                        const age = Date.now() - timestamp;
-
-                        if (age < CACHE_DURATION) {
-                            setPosts(data);
-                            setLoading(false);
-                            return;
-                        }
-                    }
-                } catch (storageError) {
-                    // localStorage not available (SSR, private browsing, etc.)
-                    // Continue to fetch from API
-                }
-
-                // Fetch from API
-                const rssUrl = process.env.NEXT_PUBLIC_MEDIUM_RSS_URL || "https://medium.com/feed/@fxrhanansari";
-                const apiUrl = process.env.NEXT_PUBLIC_RSS_API_URL || "https://api.rss2json.com/v1/api.json";
-
-                const res = await fetch(`${apiUrl}?rss_url=${encodeURIComponent(rssUrl)}`);
-
-                if (!res.ok) {
-                    if (res.status === 429) {
-                        throw new Error("Too many requests. Please try again later.");
-                    }
-                    throw new Error("Failed to fetch blog posts");
-                }
-
-                const data = await res.json();
-
-                if (data.status === "error") {
-                    throw new Error(data.message || "Failed to fetch blog posts");
-                }
-
-                if (data.items) {
-                    const postsWithThumbnails = data.items.map((item: any) => {
-                        // Extract image from content or description if thumbnail is missing
-                        let thumbnail = item.thumbnail;
-                        if (!thumbnail) {
-                            // Try content first as it usually has the full HTML
-                            if (item.content) {
-                                const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
-                                if (imgMatch) {
-                                    thumbnail = imgMatch[1];
-                                }
-                            }
-                            // Fallback to description
-                            if (!thumbnail && item.description) {
-                                const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
-                                if (imgMatch) {
-                                    thumbnail = imgMatch[1];
-                                }
-                            }
-                        }
-                        return { ...item, thumbnail };
-                    });
-
-                    const latestPosts = postsWithThumbnails.slice(0, 4);
-                    setPosts(latestPosts);
-
-                    // Cache the results (with try-catch for SSR and private browsing)
-                    try {
-                        localStorage.setItem(CACHE_KEY, JSON.stringify({
-                            data: latestPosts,
-                            timestamp: Date.now()
-                        }));
-                    } catch (storageError) {
-                        // localStorage not available, continue without caching
-                    }
-                }
-            } catch (err) {
-                console.error("Error fetching blog posts:", err);
-                setError(err instanceof Error ? err.message : "Failed to load blog posts");
-
-                // Try to use stale cache if available
-                try {
-                    const cached = localStorage.getItem(CACHE_KEY);
-                    if (cached) {
-                        const { data } = JSON.parse(cached);
-                        setPosts(data);
-                        setError(null); // Clear error if we have cached data
-                    }
-                } catch (storageError) {
-                    // localStorage not available, show error state
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
-    }, []);
-
     return (
         <section id="blog" className="py-20 px-4 md:px-10 bg-black border-t border-white/5">
             <div className="max-w-7xl mx-auto">
@@ -179,7 +101,7 @@ export default function Blog() {
                         </p>
                     </div>
                     <Link
-                        href={process.env.NEXT_PUBLIC_MEDIUM_URL || "https://fxrhanansari.medium.com/"}
+                        href="https://medium.com/@naveenjc10"
                         target="_blank"
                         className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-white transition-colors"
                     >
@@ -187,122 +109,84 @@ export default function Blog() {
                     </Link>
                 </motion.div>
 
-                {/* Loading State */}
-                {loading && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[...Array(4)].map((_, i) => (
-                            <SkeletonCard key={i} />
-                        ))}
-                    </div>
-                )}
-
-                {/* Error State */}
-                {!loading && error && posts.length === 0 && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-center py-12"
-                    >
-                        <div className="inline-flex items-center gap-2 text-muted-foreground mb-4">
-                            <AlertCircle className="w-5 h-5" />
-                            <p>{error}</p>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                            Visit my{" "}
-                            <Link
-                                href={process.env.NEXT_PUBLIC_MEDIUM_URL || "https://fxrhanansari.medium.com/"}
-                                target="_blank"
-                                className="text-primary hover:underline"
+                {/* Mobile Swipe Carousel */}
+                <div className="md:hidden relative">
+                    <div className="overflow-hidden">
+                        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                            <motion.div
+                                key={currentIndex}
+                                custom={direction}
+                                variants={variants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    x: { type: "tween", duration: 0.25, ease: "easeOut" },
+                                    opacity: { duration: 0.15 }
+                                }}
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                dragElastic={1}
+                                onDragEnd={handleDragEnd}
+                                className="cursor-grab active:cursor-grabbing touch-pan-y"
                             >
-                                Medium profile
-                            </Link>{" "}
-                            to read my latest articles.
-                        </p>
-                    </motion.div>
-                )}
+                                <BlogCard post={FEATURED_POSTS[currentIndex]} index={currentIndex} />
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
 
-                {/* Posts */}
-                {!loading && posts.length > 0 && (
-                    <>
-                        {/* Mobile Swipe Carousel */}
-                        <div className="md:hidden relative">
-                            <div className="overflow-hidden">
-                                <AnimatePresence initial={false} custom={direction} mode="popLayout">
-                                    <motion.div
-                                        key={currentIndex}
-                                        custom={direction}
-                                        variants={variants}
-                                        initial="enter"
-                                        animate="center"
-                                        exit="exit"
-                                        transition={{
-                                            x: { type: "tween", duration: 0.25, ease: "easeOut" },
-                                            opacity: { duration: 0.15 }
-                                        }}
-                                        drag="x"
-                                        dragConstraints={{ left: 0, right: 0 }}
-                                        dragElastic={1}
-                                        onDragEnd={handleDragEnd}
-                                        className="cursor-grab active:cursor-grabbing touch-pan-y"
-                                    >
-                                        <BlogCard post={posts[currentIndex]} index={currentIndex} />
-                                    </motion.div>
-                                </AnimatePresence>
-                            </div>
-
-                            {/* Carousel Navigation */}
-                            <div className="flex justify-center items-center gap-4 mt-6">
+                    {/* Carousel Navigation */}
+                    <div className="flex justify-center items-center gap-4 mt-6">
+                        <button
+                            onClick={() => paginate(-1)}
+                            disabled={currentIndex === 0}
+                            className="p-3 rounded-full border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/5 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            aria-label="Previous post"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </button>
+                        <div className="flex gap-2">
+                            {FEATURED_POSTS.map((_, idx) => (
                                 <button
-                                    onClick={() => paginate(-1)}
-                                    disabled={currentIndex === 0}
-                                    className="p-3 rounded-full border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/5 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
-                                    aria-label="Previous post"
-                                >
-                                    <ChevronLeft className="w-5 h-5" />
-                                </button>
-                                <div className="flex gap-2">
-                                    {posts.map((_, idx) => (
-                                        <button
-                                            key={idx}
-                                            onClick={() => {
-                                                setDirection(idx > currentIndex ? 1 : -1);
-                                                setCurrentIndex(idx);
-                                            }}
-                                            className={`w-2 h-2 rounded-full transition-colors touch-manipulation ${idx === currentIndex ? "bg-primary" : "bg-white/20"
-                                                }`}
-                                            aria-label={`Go to post ${idx + 1}`}
-                                        />
-                                    ))}
-                                </div>
-                                <button
-                                    onClick={() => paginate(1)}
-                                    disabled={currentIndex === posts.length - 1}
-                                    className="p-3 rounded-full border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/5 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
-                                    aria-label="Next post"
-                                >
-                                    <ChevronRight className="w-5 h-5" />
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Desktop Grid */}
-                        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {posts.map((post, index) => (
-                                <BlogCard key={index} post={post} index={index} />
+                                    key={idx}
+                                    onClick={() => {
+                                        setDirection(idx > currentIndex ? 1 : -1);
+                                        setCurrentIndex(idx);
+                                    }}
+                                    className={`w-2 h-2 rounded-full transition-colors ${
+                                        idx === currentIndex ? "bg-primary" : "bg-white/20"
+                                    }`}
+                                    aria-label={`Go to post ${idx + 1}`}
+                                />
                             ))}
                         </div>
+                        <button
+                            onClick={() => paginate(1)}
+                            disabled={currentIndex === FEATURED_POSTS.length - 1}
+                            className="p-3 rounded-full border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/5 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            aria-label="Next post"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </button>
+                    </div>
+                </div>
 
-                        <div className="mt-8 md:hidden flex justify-center">
-                            <Link
-                                href={process.env.NEXT_PUBLIC_MEDIUM_URL || "https://fxrhanansari.medium.com/"}
-                                target="_blank"
-                                className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors min-h-[44px] touch-manipulation"
-                            >
-                                Read more on Medium <ArrowUpRight className="w-4 h-4" />
-                            </Link>
-                        </div>
-                    </>
-                )}
+                {/* Desktop Grid */}
+                <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {FEATURED_POSTS.map((post, index) => (
+                        <BlogCard key={index} post={post} index={index} />
+                    ))}
+                </div>
+
+                <div className="mt-8 md:hidden flex justify-center">
+                    <Link
+                        href="https://medium.com/@naveenjc10"
+                        target="_blank"
+                        className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors min-h-[44px]"
+                    >
+                        Read more on Medium <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                </div>
             </div>
         </section>
     );

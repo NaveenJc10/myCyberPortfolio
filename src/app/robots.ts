@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://farhan-cyber.vercel.app/sitemap.xml', // Replace with actual domain
+        sitemap: 'https://Naveen-cyber.vercel.app/sitemap.xml', // Replace with actual domain
     }
 }

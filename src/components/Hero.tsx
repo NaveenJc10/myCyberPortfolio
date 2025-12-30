@@ -1,56 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export default function Hero() {
     return (
         <section className="min-h-screen flex flex-col justify-center px-4 md:px-10 pt-20 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10" />
+            {/* Background Elements - More subtle */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10" />
 
-            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] }}
+                    className="space-y-6"
                 >
-                    <h2 className="text-sm md:text-base font-medium text-muted-foreground mb-4 tracking-wider uppercase">
-                        Cyber Security Professional
-                    </h2>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] mb-6">
-                        Farhan <br />
-                        <span className="text-muted-foreground">Ansari</span>
+                    <div className="space-y-1">
+                        <h2 className="text-xs md:text-sm font-medium text-muted-foreground tracking-[0.2em] uppercase">
+                            Cyber Security Professional
+                        </h2>
+                        <div className="h-[1px] w-16 bg-gradient-to-r from-primary/60 to-transparent mt-3" />
+                    </div>
+                    
+                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]">
+                        Naveen
                     </h1>
-                    <p className="text-lg text-muted-foreground max-w-md mb-8 leading-relaxed">
+                    
+                    <p className="text-base md:text-lg text-muted-foreground/80 max-w-md leading-relaxed pt-2">
                         Driven by curiosity and a love for security. I create simple, functional, and secure digital experiences.
                     </p>
 
-                    <div className="flex items-center gap-4">
-                        <div className="h-[1px] w-12 bg-white/20"></div>
-                        <span className="text-sm text-muted-foreground">Based in India</span>
+                    <div className="flex items-center gap-3 pt-4">
+                        <div className="h-[1px] w-8 bg-gradient-to-r from-white/40 to-white/10"></div>
+                        <span className="text-xs md:text-sm text-muted-foreground/60 font-light tracking-wide">Based in Malaysia</span>
                     </div>
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="relative h-[400px] md:h-[600px] w-full rounded-2xl overflow-hidden transition-all duration-500"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ 
+                        duration: 0.8, 
+                        delay: 0.2,
+                        ease: [0.25, 0.1, 0.25, 1.0]
+                    }}
+                    className="relative h-[500px] md:h-[750px] w-full rounded-2xl overflow-hidden shadow-2xl shadow-primary/5"
                 >
-                    <Image
-                        src="/hero.webp"
-                        alt="Farhan Ansari - Cyber Security Professional"
-                        fill
-                        className="object-cover"
-                        quality={100}
-                        priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-contain"
+                    >
+                        <source src="/cybervid.webm" type="video/webm" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 ring-1 ring-white/5 rounded-2xl pointer-events-none" />
                 </motion.div>
             </div>
-
-            {/* Arrow removed as per request */}
         </section>
     );
 }

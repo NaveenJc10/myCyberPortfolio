@@ -1,4 +1,4 @@
-# 🛡️ Farhan in Cyber - Portfolio Website
+# 🛡️ Naveen in Cyber - Portfolio Website
 
 A modern, responsive portfolio website for a Cyber Security Analyst built with Next.js 15, TypeScript, and Tailwind CSS.
 
@@ -6,22 +6,22 @@ A modern, responsive portfolio website for a Cyber Security Analyst built with N
 
 - **Modern Tech Stack**: Built with Next.js 15 (App Router), React 19, TypeScript, and Tailwind CSS 4
 - **Responsive Design**: Fully responsive across all devices (mobile, tablet, desktop)
-- **Performance Optimized**: 
+- **Performance Optimized**:
   - Font optimization with `next/font`
   - Image optimization with WebP format
   - RSS feed caching (30-minute TTL)
   - Skeleton loaders for better UX
-- **SEO Optimized**: 
+- **SEO Optimized**:
   - Enhanced metadata with OpenGraph and Twitter cards
   - JSON-LD structured data
   - Sitemap and robots.txt
   - Proper heading hierarchy
-- **Smooth Animations**: 
+- **Smooth Animations**:
   - Framer Motion animations throughout
   - Page transitions and scroll-triggered effects
   - Enhanced mobile menu with stagger animations
   - Animated timeline for experience section
-- **Dynamic Content**: 
+- **Dynamic Content**:
   - Live blog feed from Medium via RSS
   - GitHub projects integration
   - Error boundaries and loading states
@@ -50,19 +50,22 @@ A modern, responsive portfolio website for a Cyber Security Analyst built with N
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/fxrhan/myCyberPortfolio.git
    cd myCyberPortfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
-   
+
    Copy `.env.example` to `.env.local`:
+
    ```bash
    cp .env.example .env.local
    ```
@@ -70,6 +73,7 @@ A modern, responsive portfolio website for a Cyber Security Analyst built with N
    Update the variables in `.env.local` with your information.
 
 4. **Run the development server**
+
    ```bash
    npm run dev
    ```
@@ -116,7 +120,6 @@ portfolio/
 └── next.config.ts      # Next.js configuration
 ```
 
-
 **Important**: Update `NEXT_PUBLIC_SITE_URL` to your production domain before deployment.
 
 ## Customization
@@ -136,6 +139,5 @@ portfolio/
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
 
 ⭐ If you found this project helpful, please consider giving it a star!

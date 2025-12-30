@@ -8,36 +8,36 @@ import Image from "next/image";
 
 const projects = [
     {
-        title: "passForge",
-        category: "Cybersecurity Tool",
-        description: "Intelligence-driven password list generator with ML-based patterns and phonetic variations.",
-        link: "https://github.com/fxrhan/passForge",
+        title: "Multi-Protocol Honeypot with ML",
+        category: "Cyber Threat Detection",
+        description: "A multi-protocol honeypot that enhances Glastopf with dynamic protocol switching and ML to detect and analyze modern multi-vector cyberattacks.",
+        link: "https://github.com/NaveenJc10/Multi-Protocol-Honeypot-with-ML",
         color: "bg-red-500",
         image: "/passforge_bg.png"
     },
     {
-        title: "takeover",
-        category: "Open Source Contribution",
-        description: "Sub-Domain TakeOver Vulnerability Scanner.",
-        link: "https://github.com/edoardottt/takeover",
+        title: "Password Security Analyzer",
+        category: "Cybersecurity Tool",
+        description: "A browser-based tool for analyzing password strength and generating secure passwords.",
+        link: "https://github.com/NaveenJc10/Password-Security-Analyzer",
         color: "bg-orange-500",
         image: "/takeover_bg.png"
     },
     {
         title: "Packet-Sniffer",
-        category: "Cybersecurity Tool",
+        category: "Network Security Tool",
         description: "A packet sniffer coded in pure python.",
-        link: "https://github.com/fxrhan/Packet-Sniffer",
+        link: "https://github.com/NaveenJc10/packet-sniffer",
         color: "bg-green-500",
         image: "/packet_sniffer_bg.png"
     },
     {
-        title: "Web-Recon-Automation",
-        category: "Automation Script",
-        description: "A bash script to automate the necessary Reconnaissance task for websites.",
-        link: "https://github.com/fxrhan/Web-Recon-Automation",
+        title: "AES-Encryption",
+        category: "Cybersecurity Tool",
+        description: "Encrypt and decrypt text easily with Python using the AES algorithm in a command-line interface.",
+        link: "https://github.com/NaveenJc10/AES-Encryption",
         color: "bg-purple-500",
-        image: "/recon_bg.png"
+        image: "/aes_bg.png"
     },
 ];
 
@@ -100,7 +100,7 @@ export default function Projects() {
                             Here are some of the projects I've worked on. Each one was a unique challenge that helped me grow.
                         </p>
                     </div>
-                    <Link href="https://github.com/fxrhan?tab=repositories" target="_blank" className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-white transition-colors">
+                    <Link href="https://github.com/NaveenJc10?tab=repositories" target="_blank" className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-white transition-colors">
                         View all repositories <ArrowUpRight className="w-4 h-4" />
                     </Link>
                 </motion.div>
@@ -175,7 +175,7 @@ export default function Projects() {
 
                 <div className="flex justify-center">
                     <Link
-                        href="https://github.com/fxrhan"
+                        href="https://github.com/NaveenJc10?tab=repositories"
                         target="_blank"
                         className="px-8 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-white font-medium flex items-center gap-2 min-h-[44px] touch-manipulation"
                     >

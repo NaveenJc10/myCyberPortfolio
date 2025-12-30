@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
 import { inter } from "./fonts";
 import "./globals.css";
+import Preloader from '@/components/Preloader';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    default: "Farhan in Cyber",
-    template: "%s | Farhan in Cyber"
+    default: "Naveen in Cyber",
+    template: "%s | Naveen in Cyber"
   },
-  description: "Portfolio of Farhan Ansari - Cyber Security Analyst. Specializing in Penetration Testing, Cloud Security, and Security Operations.",
-  keywords: ["Cyber Security", "Penetration Testing", "Cloud Security", "Security Operations", "Farhan Ansari", "InfoSec", "Ethical Hacking"],
-  authors: [{ name: "Farhan Ansari" }],
-  creator: "Farhan Ansari",
+  description: "Portfolio of Naveen - Cyber Security Analyst. Specializing in Penetration Testing, Cloud Security, and Security Operations.",
+  keywords: ["Cyber Security", "Penetration Testing", "Cloud Security", "Security Operations", "Naveen", "InfoSec", "Ethical Hacking"],
+  authors: [{ name: "Naveen" }],
+  creator: "Naveen",
   openGraph: {
-    title: "Farhan in Cyber",
-    description: "Portfolio of Farhan Ansari - Cyber Security Analyst. Specializing in Penetration Testing, Cloud Security, and Security Operations.",
+    title: "Naveen in Cyber",
+    description: "Portfolio of Naveen - Cyber Security Analyst. Specializing in Penetration Testing, Cloud Security, and Security Operations.",
     url: "/",
-    siteName: "Farhan in Cyber",
+    siteName: "Naveen in Cyber",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Farhan Ansari - Cyber Security Professional",
+        alt: "Naveen - Cyber Security Professional",
       },
     ],
     locale: "en_US",
@@ -30,10 +31,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Farhan in Cyber",
-    description: "Portfolio of Farhan Ansari - Cyber Security Analyst",
+    title: "Naveen in Cyber",
+    description: "Portfolio of Naveen - Cyber Security Analyst",
     images: ["/og-image.png"],
-    creator: "@fxrhanansari",
+    creator: "@naveen",
   },
   robots: {
     index: true,
@@ -67,14 +68,14 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Farhan Ansari",
+    name: "Naveen",
     jobTitle: "Cyber Security Analyst",
     url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     sameAs: [
-      "https://github.com/fxrhan",
-      "https://x.com/fxrhanansari",
-      "https://fxrhanansari.medium.com",
-      "https://linkedin.com/in/ansari-farhan",
+      "https://github.com/NaveenJc10",
+      //"https://x.com/naveenjc10",
+      "https://medium.com/@naveenjc10",
+      "https://www.linkedin.com/in/naveen-thinarthan-70b346309/",
     ],
     description: "Cyber Security Analyst specializing in Penetration Testing, Cloud Security, and Security Operations.",
     image: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/og-image.png`,
@@ -83,7 +84,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased px-6 md:px-0`}>
+        <Preloader />
+        
         {/* Microsoft Clarity Analytics */}
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
           <script

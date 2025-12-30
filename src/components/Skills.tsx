@@ -1,33 +1,52 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaReact, FaPython, FaAws, FaDocker, FaMicrosoft } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiSplunk, SiJavascript, SiC, SiGnubash, SiKalilinux, SiWireshark, SiBurpsuite, SiMetasploit } from "react-icons/si";
-import { Shield, Users, MessageSquare, Brain, Zap } from "lucide-react";
+import { FaPython, FaMicrosoft, FaNetworkWired } from "react-icons/fa";
+import { SiSplunk, SiJavascript, SiCplusplus, SiGnubash, SiKalilinux, SiWireshark, SiBurpsuite, SiMetasploit, SiVmware } from "react-icons/si";
+import { Shield, Users, MessageSquare, Brain, Zap, Search, Target, Lock, Radio, FileSearch, Eye, AlertTriangle, Network, Server, FileText } from "lucide-react";
 
 const skills = [
     {
-        category: "Security Operations & Tools",
+        category: "Security Operations & Blue Team",
         icon: <Shield className="w-6 h-6" />,
         items: [
-            { name: "Penetration Testing", icon: <SiKalilinux /> },
-            { name: "Splunk", icon: <SiSplunk /> },
-            { name: "Sentinel", icon: <FaMicrosoft /> },
-            { name: "Wireshark", icon: <SiWireshark /> },
-            { name: "Burp Suite", icon: <SiBurpsuite /> },
-            { name: "Metasploit", icon: <SiMetasploit /> },
-            { name: "Nmap", icon: <SiKalilinux /> }
+            { name: "Incident Response", icon: <AlertTriangle /> },
+            { name: "Threat Analysis & Threat Intelligence", icon: <Target /> },
+            { name: "Digital Forensics", icon: <FileSearch /> },
+            { name: "OSINT", icon: <Search /> },
+            { name: "MITRE ATT&CK", icon: <Shield /> },
+            { name: "IDS / IPS", icon: <Eye /> },
+            { name: "EDR", icon: <Lock /> },
+            { name: "Splunk", icon: <SiSplunk /> }
         ],
         className: "md:col-span-2 md:row-span-1 bg-indigo-900/20 border-indigo-500/20",
     },
     {
-        category: "Cloud Security & DevOps",
-        icon: <FaAws className="w-6 h-6" />,
+        category: "Offensive Security & Tools",
+        icon: <SiKalilinux className="w-6 h-6" />,
         items: [
-            { name: "Azure", icon: <FaMicrosoft /> },
-            { name: "AWS", icon: <FaAws /> },
-            { name: "Docker", icon: <FaDocker /> },
-            { name: "Cloud Security", icon: <Shield /> }
+            { name: "Network Vulnerability Scanning", icon: <Radio /> },
+            { name: "Penetration Testing", icon: <SiKalilinux /> },
+            { name: "Burp Suite", icon: <SiBurpsuite /> },
+            { name: "Nmap", icon: <SiKalilinux /> },
+            { name: "Metasploit", icon: <SiMetasploit /> },
+            { name: "Nessus", icon: <Search /> },
+            { name: "Wireshark", icon: <SiWireshark /> }
+        ],
+        className: "md:col-span-2 md:row-span-1 bg-red-900/20 border-red-500/20",
+    },
+    {
+        category: "Networking & Infrastructure",
+        icon: <Network className="w-6 h-6" />,
+        items: [
+            { name: "TCP/IP & OSI Models", icon: <Network /> },
+            { name: "LAN / WAN", icon: <FaNetworkWired /> },
+            { name: "DNS", icon: <Server /> },
+            { name: "DHCP", icon: <Server /> },
+            { name: "VPN", icon: <Lock /> },
+            { name: "Firewall", icon: <Shield /> },
+            { name: "Active Directory", icon: <FaMicrosoft /> },
+            { name: "VMware", icon: <SiVmware /> }
         ],
         className: "md:col-span-2 md:row-span-1 bg-neutral-900/50 border-neutral-800",
     },
@@ -38,19 +57,9 @@ const skills = [
             { name: "Python", icon: <FaPython /> },
             { name: "Bash", icon: <SiGnubash /> },
             { name: "JavaScript", icon: <SiJavascript /> },
-            { name: "C", icon: <SiC /> }
+            { name: "C++", icon: <SiCplusplus /> }
         ],
-        className: "md:col-span-1 bg-neutral-900/50 border-neutral-800",
-    },
-    {
-        category: "Front-End",
-        icon: <FaReact className="w-6 h-6" />,
-        items: [
-            { name: "React", icon: <FaReact /> },
-            { name: "Next.js", icon: <SiNextdotjs /> },
-            { name: "Tailwind", icon: <SiTailwindcss /> }
-        ],
-        className: "md:col-span-1 bg-neutral-900/50 border-neutral-800",
+        className: "md:col-span-2 bg-neutral-900/50 border-neutral-800",
     },
     {
         category: "Soft Skills",
@@ -59,7 +68,9 @@ const skills = [
             { name: "Communication", icon: <MessageSquare /> },
             { name: "Problem Solving", icon: <Brain /> },
             { name: "Leadership", icon: <Users /> },
-            { name: "Adaptability", icon: <Zap /> }
+            { name: "Adaptability", icon: <Zap /> },
+            { name: "Analytical Thinking", icon: <Brain /> },
+            { name: "Documentation", icon: <FileText /> }
         ],
         className: "md:col-span-2 bg-emerald-900/20 border-emerald-500/20",
     },
@@ -89,7 +100,11 @@ export default function Skills() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className={`p-6 rounded-3xl border flex flex-col justify-between group hover:border-primary/50 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 ${skill.className}`}
+                            className={`p-6 rounded-3xl border flex flex-col ${
+                                skill.category === "Offensive Security & Tools" || skill.category === "Languages & Scripting" 
+                                    ? "gap-4" 
+                                    : "justify-between"
+                            } group hover:border-primary/50 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 ${skill.className}`}
                         >
                             <div className="flex justify-between items-start">
                                 <div className="p-2 bg-white/5 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
