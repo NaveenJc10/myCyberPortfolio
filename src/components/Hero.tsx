@@ -1,8 +1,43 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 export default function Hero() {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        // Force video to play on mount
+        const playVideo = async () => {
+            try {
+                await video.play();
+            } catch (error) {
+                console.log("Autoplay prevented:", error);
+            }
+        };
+
+        playVideo();
+
+        // Intersection Observer to ensure video plays when visible
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {});
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+
+        observer.observe(video);
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <section className="min-h-screen flex flex-col justify-center px-4 md:px-10 pt-20 relative overflow-hidden">
             {/* Background Elements - More subtle */}
@@ -37,7 +72,7 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-<motion.div
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ 
@@ -48,15 +83,13 @@ export default function Hero() {
                     className="relative h-[500px] md:h-[750px] w-full rounded-2xl overflow-hidden shadow-2xl shadow-primary/5"
                 >
                     <video
+                        ref={videoRef}
                         autoPlay
                         loop
                         muted
                         playsInline
                         preload="auto"
-                        controls={false}
-                        disablePictureInPicture
-                        className="absolute inset-0 w-full h-full object-contain [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-start-playback-button]:hidden"
-                        style={{ pointerEvents: 'none' }}
+                        className="absolute inset-0 w-full h-full object-contain"
                     >
                         <source src="/cybervid.webm" type="video/webm" />
                         Your browser does not support the video tag.
