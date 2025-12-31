@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "Naveen in Cyber",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://naveenjc.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Naveen - Cyber Security Professional",
