@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { FaPython, FaMicrosoft, FaNetworkWired } from "react-icons/fa";
 import { SiSplunk, SiJavascript, SiCplusplus, SiGnubash, SiKalilinux, SiWireshark, SiBurpsuite, SiMetasploit, SiVmware } from "react-icons/si";
-import { Shield, Users, MessageSquare, Brain, Zap, Search, Target, Lock, Radio, FileSearch, Eye, AlertTriangle, Network, Server, FileText } from "lucide-react";
+import { Shield, Users, MessageSquare, Brain, Zap, Search, Target, Lock, Radio, FileSearch, Eye, AlertTriangle, Network, Server, FileText, FileCheck, Route, GitBranch, Workflow } from "lucide-react";
 
 const skills = [
     {
@@ -17,7 +17,9 @@ const skills = [
             { name: "MITRE ATT&CK", icon: <Shield /> },
             { name: "IDS / IPS", icon: <Eye /> },
             { name: "EDR", icon: <Lock /> },
-            { name: "Splunk", icon: <SiSplunk /> }
+            { name: "Splunk", icon: <SiSplunk /> },
+            { name: "NIST Cybersecurity Framework", icon: <FileCheck /> },
+            { name: "Microsoft Sentinel", icon: <FaMicrosoft /> }
         ],
         className: "md:col-span-2 md:row-span-1 bg-indigo-900/20 border-indigo-500/20",
     },
@@ -46,7 +48,10 @@ const skills = [
             { name: "VPN", icon: <Lock /> },
             { name: "Firewall", icon: <Shield /> },
             { name: "Active Directory", icon: <FaMicrosoft /> },
-            { name: "VMware", icon: <SiVmware /> }
+            { name: "VMware", icon: <SiVmware /> },
+            { name: "BGP", icon: <Route /> },
+            { name: "OSPF", icon: <GitBranch /> },
+            { name: "SDN", icon: <Workflow /> }
         ],
         className: "md:col-span-2 md:row-span-1 bg-neutral-900/50 border-neutral-800",
     },
